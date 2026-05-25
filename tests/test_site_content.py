@@ -1,5 +1,8 @@
+import importlib.util
 from html.parser import HTMLParser
 from pathlib import Path
+import subprocess
+import sys
 import unittest
 from urllib.parse import urlparse
 
@@ -80,11 +83,17 @@ class ProjectPageContractTest(unittest.TestCase):
         for reference in parser.references:
             self.assertTrue((ROOT / reference).exists(), f"broken local reference: {reference}")
 
-    def test_github_pages_release_instructions_are_included(self):
+    def test_readme_is_a_public_project_landing_page(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("GitHub Pages", readme)
-        self.assertIn("arXiv", readme)
-        self.assertIn("extract_figures.py", readme)
+        for marker in (
+            "https://hertzdot222.github.io/D2Turb/",
+            "https://arxiv.org/abs/XXXX.XXXXX",
+            "https://example.com/dataset-placeholder",
+            "https://example.com/model-placeholder",
+            "code/d2turb_demo.py",
+            "Simplified Demo",
+        ):
+            self.assertIn(marker, readme)
         self.assertTrue((ROOT / ".nojekyll").exists())
 
     def test_resource_links_include_placeholders_and_repository(self):
@@ -92,6 +101,33 @@ class ProjectPageContractTest(unittest.TestCase):
         self.assertIn("https://arxiv.org/abs/XXXX.XXXXX", html)
         self.assertIn("https://arxiv.org/pdf/XXXX.XXXXX", html)
         self.assertIn("https://github.com/HertzDot222/D2Turb", html)
+
+    def test_simplified_demo_code_is_published(self):
+        source_path = ROOT / "code" / "d2turb_demo.py"
+        requirements_path = ROOT / "code" / "requirements.txt"
+        self.assertTrue(source_path.exists())
+        self.assertTrue(requirements_path.exists())
+        source = source_path.read_text(encoding="utf-8")
+        for marker in (
+            "class TextureDeblur",
+            "class ASPI",
+            "class TiltRectifier",
+            "class D2TurbDemo",
+            "simplified architecture demonstration",
+        ):
+            self.assertIn(marker, source)
+        self.assertIn("torch>=2.1", requirements_path.read_text(encoding="utf-8"))
+
+    @unittest.skipUnless(importlib.util.find_spec("torch"), "PyTorch is not installed in the test runtime.")
+    def test_simplified_demo_runs_forward_pass_when_torch_is_available(self):
+        completed = subprocess.run(
+            [sys.executable, str(ROOT / "code" / "d2turb_demo.py")],
+            capture_output=True,
+            check=True,
+            text=True,
+        )
+        self.assertIn("deblurred: (1, 3, 128, 128)", completed.stdout)
+        self.assertIn("restored: (1, 3, 128, 128)", completed.stdout)
 
 
 if __name__ == "__main__":

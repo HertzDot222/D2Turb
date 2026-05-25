@@ -1,57 +1,86 @@
-# D2Turb Project Page
+# D<sup>2</sup>Turb: Depth-Aware Simulation and Decoupled Learning
 
-Static project page for **D2Turb: Depth-Aware Simulation and Decoupled Learning for Single-Frame Atmospheric Turbulence Mitigation**. The page presents the method overview, reported tables, visual comparisons, ablations, and documented limitations as a public companion to an arXiv preprint.
+**Single-Frame Atmospheric Turbulence Mitigation**
 
-## Publish With GitHub Pages
+[Project Page](https://hertzdot222.github.io/D2Turb/) |
+[Paper (placeholder)](https://arxiv.org/abs/XXXX.XXXXX) |
+[Dataset (placeholder)](https://example.com/dataset-placeholder) |
+[Pretrained Models (placeholder)](https://example.com/model-placeholder)
 
-Target repository: [HertzDot222/D2Turb](https://github.com/HertzDot222/D2Turb).
+D<sup>2</sup>Turb addresses single-frame atmospheric turbulence by separating
+texture recovery from geometric rectification. A depth-aware simulation model
+provides spatially varying turbulence and intermediate tilt supervision, while
+Adaptive Structural Prior Injection (ASPI) transfers sharp structural cues into
+the geometric rectifier.
 
-1. Upload the contents of this folder to `HertzDot222/D2Turb`. Do not upload the local `.tools/` or `.work/` folders.
-2. After the arXiv record is available, replace the placeholder URLs in `index.html` with links to the arXiv abstract page and supplementary PDF.
-3. In the repository, open **Settings > Pages**, choose **Deploy from a branch**, select `main` and `/(root)`, then save.
-4. Visit `https://hertzdot222.github.io/D2Turb/` and confirm that figures, tables, the expanded-image viewer, and the arXiv link load correctly.
+![D2Turb motivation and qualitative result](assets/img/teaser.png)
 
-The public copy is intentionally publication-facing: keep it focused solely on the paper and its evidence.
+## Highlights
 
-## Replace The Resource Buttons
+- **Depth-aware simulation:** models spatially varying blur and deformation using scene-depth cues.
+- **Decoupled restoration:** separates deblurring from non-rigid geometric correction.
+- **Structural guidance:** ASPI injects texture-stage priors into the rectification stage.
+- **Reported real-world performance:** `6.653` NIQE and `52.815` MUSIQ on RLR-AT.
 
-Find the placeholder URLs in `index.html` and replace them with the released preprint links:
+## Reported Results
 
-```html
-<a class="button primary" href="https://arxiv.org/abs/XXXX.XXXXX">arXiv</a>
-<a class="button" href="https://arxiv.org/pdf/XXXX.XXXXX">Supplement</a>
-```
+| Evaluation | Metric | D<sup>2</sup>Turb |
+| --- | ---: | ---: |
+| Synthetic average | PSNR / SSIM / LPIPS | 25.724 / 0.736 / **0.208** |
+| Real-world RLR-AT | NIQE / MUSIQ | **6.653** / **52.815** |
+| Depth-aware simulation study | NIQE / MUSIQ | 6.980 / 51.996 |
 
-Update the citation block in the Resources section with the final author list and arXiv identifier at the same time.
+More quantitative comparisons, qualitative figures, ablations, and documented
+limitations are available on the [project page](https://hertzdot222.github.io/D2Turb/).
 
-## Rebuild Figure Crops
+## Resources
 
-The published PNG assets were cropped from the supplied manuscript PDFs using fixed, header-free regions. To regenerate them locally:
+| Resource | Link | Status |
+| --- | --- | --- |
+| Project Page | [Website](https://hertzdot222.github.io/D2Turb/) | Available |
+| Paper | [arXiv](https://arxiv.org/abs/XXXX.XXXXX) | Placeholder |
+| Supplement | [PDF](https://arxiv.org/pdf/XXXX.XXXXX) | Placeholder |
+| Dataset | [Download](https://example.com/dataset-placeholder) | Placeholder |
+| Pretrained Models | [Download](https://example.com/model-placeholder) | Placeholder |
 
-```powershell
-python -m pip install PyMuPDF==1.24.14 --target .tools
-python scripts/extract_figures.py "<path-to-main-pdf>" "<path-to-supplement-pdf>"
-```
+Placeholder resource links will be replaced when the corresponding public
+artifacts are released.
 
-For a manual crop audit, render source-page previews into the ignored `.work/` directory:
+## Simplified Demo Code
 
-```powershell
-python scripts/extract_figures.py "<path-to-main-pdf>" "<path-to-supplement-pdf>" --preview
-```
-
-## Structure
+[`code/d2turb_demo.py`](code/d2turb_demo.py) is a compact PyTorch architecture
+demonstration for understanding the two-stage workflow:
 
 ```text
-index.html                  Single-page paper website
-assets/css/style.css        Responsive visual system
-assets/js/main.js           Figure lightbox and navigation state
-assets/img/*.png            Cropped paper figures used on the page
-scripts/extract_figures.py  Repeatable PDF crop generator
-tests/test_site_content.py  Public-page contract checks
+Turbulent Input -> TextureDeblur -> Deblurred Image + Guide Features
+                                     |
+                                     v
+                              ASPI + TiltRectifier -> Restored Image
 ```
 
-Run the contract checks before publishing:
+The demo is intentionally simplified for readability. It is not the complete
+training implementation and does not contain pretrained weights or benchmark
+evaluation code.
 
-```powershell
-python -m unittest discover -s tests -v
+```bash
+pip install -r code/requirements.txt
+python code/d2turb_demo.py
+```
+
+Expected output shapes:
+
+```text
+input:     (1, 3, 128, 128)
+deblurred: (1, 3, 128, 128)
+restored:  (1, 3, 128, 128)
+```
+
+## Citation
+
+```bibtex
+@article{d2turb,
+  title = {D2Turb: Depth-Aware Simulation and Decoupled Learning for
+           Single-Frame Atmospheric Turbulence Mitigation},
+  note = {arXiv preprint, citation to be updated}
+}
 ```
