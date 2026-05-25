@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Project page for D2Turb, a depth-aware simulation and decoupled learning framework for single-frame atmospheric turbulence mitigation.">
+  <title>D2Turb | Depth-Aware Simulation and Decoupled Learning</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary navigation">
+      <a class="brand" href="#top">D<sup>2</sup>Turb</a>
+      <div class="nav-links">
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#ablations">Ablations</a>
+        <a href="#limitations">Limitations</a>
+        <a href="#resources">Resources</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="content">
+    <section id="top" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Single-frame atmospheric turbulence mitigation</p>
+          <h1>D<sup>2</sup>Turb: Depth-Aware Simulation and Decoupled Learning</h1>
+          <p class="abstract">
+            A physics-grounded synthesis protocol provides spatially varying
+            degradation and intermediate tilt supervision, while a decoupled
+            restoration pipeline uses Adaptive Structural Prior Injection (ASPI)
+            to recover sharp texture and rectify non-rigid geometry.
+          </p>
+          <div class="actions" aria-label="Project resources">
+            <a class="button primary placeholder" href="https://arxiv.org/abs/XXXX.XXXXX" aria-label="arXiv placeholder link to be updated">arXiv placeholder</a>
+            <a class="button placeholder" href="https://arxiv.org/pdf/XXXX.XXXXX" aria-label="Supplement placeholder link to be updated">Supplement placeholder</a>
+            <a class="button" href="https://github.com/HertzDot222/D2Turb">GitHub</a>
+          </div>
+        </div>
+        <aside class="hero-evidence" aria-label="Headline reported results">
+          <p class="reported">Reported results</p>
+          <div class="metric-card">
+            <strong>0.208</strong>
+            <span>Synthetic Avg. LPIPS <small>lower is better</small></span>
+          </div>
+          <div class="metric-pair">
+            <div class="metric-card">
+              <strong>6.653</strong>
+              <span>RLR-AT NIQE <small>lower is better</small></span>
+            </div>
+            <div class="metric-card">
+              <strong>52.815</strong>
+              <span>RLR-AT MUSIQ <small>higher is better</small></span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section teaser-section" aria-labelledby="motivation-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Motivation</p>
+          <h2 id="motivation-title">Depth changes the degradation</h2>
+          <p>
+            Real-world turbulence accumulates along the optical path: distant
+            structures can be strongly blurred and warped while nearer regions
+            remain relatively stable. D<sup>2</sup>Turb targets both texture
+            recovery and geometric rectification under this spatial imbalance.
+          </p>
+        </div>
+        <figure class="figure-card zoomable">
+          <button class="figure-button" type="button" data-lightbox-src="assets/img/teaser.png" data-lightbox-alt="Depth-dependent degradation motivation and restoration comparison.">
+            <img src="assets/img/teaser.png" alt="Depth-dependent degradation motivation and restoration comparison." loading="eager">
+            <span>View larger</span>
+          </button>
+          <figcaption>Depth-dependent degradation and the distortion-perception challenge.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="method" class="section method-section" aria-labelledby="method-title">
+      <div class="container">
+        <div class="section-heading centered">
+          <p class="eyebrow">Core Idea</p>
+          <h2 id="method-title">Depth-Aware Simulation meets decoupled restoration</h2>
+        </div>
+        <div class="pillars">
+          <article class="pillar">
+            <span class="number">01</span>
+            <h3>Depth-Aware Simulation</h3>
+            <p>A path-integrated depth map modulates blur and distortion strength and produces intermediate tilt supervision.</p>
+          </article>
+          <article class="pillar">
+            <span class="number">02</span>
+            <h3>Decoupled Learning</h3>
+            <p>A texture module estimates the tilt-only intermediate image before a rectifier predicts dense geometric unwarping.</p>
+          </article>
+          <article class="pillar">
+            <span class="number">03</span>
+            <h3>ASPI</h3>
+            <p>Adaptive Structural Prior Injection transfers structural cues from deblurring to the geometric rectifier.</p>
+          </article>
+        </div>
+        <figure class="figure-card framework zoomable">
+          <button class="figure-button" type="button" data-lightbox-src="assets/img/framework.png" data-lightbox-alt="Overview of the D2Turb simulation and restoration framework.">
+            <img src="assets/img/framework.png" alt="Overview of the D2Turb simulation and restoration framework." loading="lazy">
+            <span>View larger</span>
+          </button>
+          <figcaption>Framework overview: synthesis, multi-stage supervision, and ASPI-guided spatial unwarping.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="results" class="section results-section" aria-labelledby="results-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Evidence</p>
+          <h2 id="results-title">Quantitative Results</h2>
+          <p>
+            The tables below reproduce the values reported in the paper. The
+            primary D<sup>2</sup>Turb setting uses Restormer as its texture
+            deblurring backbone.
+          </p>
+        </div>
+
+        <div class="result-callouts">
+          <article>
+            <strong>19% relative LPIPS reduction</strong>
+            <p>Compared with the second-best average synthetic LPIPS reported in the main comparison (0.257 to 0.208).</p>
+          </article>
+          <article>
+            <strong>Best real-world scores</strong>
+            <p>D<sup>2</sup>Turb reports the lowest NIQE and highest MUSIQ on RLR-AT among compared methods.</p>
+          </article>
+        </div>
+
+        <article class="table-card">
+          <div class="table-title">
+            <h3>Synthetic Test Set</h3>
+            <p>Average metrics with weak, medium, and strong details below.</p>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Method</th>
+                  <th scope="col">PSNR Avg. &uarr;</th>
+                  <th scope="col">SSIM Avg. &uarr;</th>
+                  <th scope="col">LPIPS Avg. &darr;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">AT-Net</th><td>24.904</td><td>0.711</td><td>0.291</td></tr>
+                <tr><th scope="row">TurbNet</th><td>25.575</td><td>0.726</td><td>0.290</td></tr>
+                <tr><th scope="row">TMT</th><td>25.400</td><td>0.726</td><td class="second">0.262</td></tr>
+                <tr><th scope="row">FocalNet</th><td>25.503</td><td>0.724</td><td>0.292</td></tr>
+                <tr><th scope="row">Restormer</th><td>25.521</td><td class="second">0.730</td><td>0.257</td></tr>
+                <tr><th scope="row">AdaIR</th><td class="second">25.533</td><td class="second">0.730</td><td>0.258</td></tr>
+                <tr class="ours"><th scope="row">D<sup>2</sup>Turb (Ours)</th><td>25.724</td><td>0.736</td><td>0.208</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <details>
+            <summary>Show turbulence-intensity breakdown</summary>
+            <div class="table-scroll details-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th rowspan="2" scope="col">Method</th>
+                    <th colspan="3" scope="colgroup">PSNR &uarr;</th>
+                    <th colspan="3" scope="colgroup">SSIM &uarr;</th>
+                    <th colspan="3" scope="colgroup">LPIPS &darr;</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">Weak</th><th scope="col">Med.</th><th scope="col">Strong</th>
+                    <th scope="col">Weak</th><th scope="col">Med.</th><th scope="col">Strong</th>
+                    <th scope="col">Weak</th><th scope="col">Med.</th><th scope="col">Strong</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">AT-Net</th><td>26.869</td><td>24.529</td><td>23.287</td><td>0.795</td><td>0.697</td><td>0.640</td><td>0.196</td><td>0.299</td><td>0.378</td></tr>
+                  <tr><th scope="row">TurbNet</th><td>27.513</td><td>25.174</td><td>24.010</td><td>0.805</td><td>0.713</td><td>0.658</td><td>0.198</td><td>0.298</td><td>0.375</td></tr>
+                  <tr><th scope="row">TMT</th><td>27.413</td><td>24.992</td><td>23.767</td><td>0.805</td><td>0.712</td><td>0.658</td><td>0.189</td><td>0.270</td><td>0.334</td></tr>
+                  <tr><th scope="row">FocalNet</th><td>27.459</td><td>25.101</td><td>23.922</td><td>0.805</td><td>0.711</td><td>0.656</td><td>0.198</td><td>0.302</td><td>0.380</td></tr>
+                  <tr><th scope="row">Restormer</th><td>27.499</td><td>25.112</td><td>23.922</td><td>0.808</td><td>0.717</td><td>0.664</td><td>0.179</td><td>0.265</td><td>0.330</td></tr>
+                  <tr><th scope="row">AdaIR</th><td>27.510</td><td>25.125</td><td>23.936</td><td>0.808</td><td>0.717</td><td>0.664</td><td>0.179</td><td>0.266</td><td>0.331</td></tr>
+                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb</th><td>27.660</td><td>25.331</td><td>24.153</td><td>0.811</td><td>0.724</td><td>0.673</td><td>0.150</td><td>0.215</td><td>0.261</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </article>
+
+        <div class="two-column tables">
+          <article class="table-card">
+            <div class="table-title">
+              <h3>Real-World RLR-AT</h3>
+              <p>No-reference perceptual metrics.</p>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Method</th><th scope="col">NIQE &darr;</th><th scope="col">MUSIQ &uarr;</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">AT-Net</th><td>6.908</td><td>48.365</td></tr>
+                  <tr><th scope="row">TurbNet</th><td>7.169</td><td>48.387</td></tr>
+                  <tr><th scope="row">TMT</th><td>7.049</td><td class="second">52.418</td></tr>
+                  <tr><th scope="row">FocalNet</th><td>7.285</td><td>46.471</td></tr>
+                  <tr><th scope="row">Restormer</th><td>6.995</td><td>50.705</td></tr>
+                  <tr><th scope="row">AdaIR</th><td class="second">6.933</td><td>51.135</td></tr>
+                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb</th><td>6.653</td><td>52.815</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="table-card">
+            <div class="table-title">
+              <h3>Depth-Aware Simulation</h3>
+              <p>Sim-to-real evaluation using a TurbNet baseline.</p>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Training Simulator</th><th scope="col">NIQE &darr;</th><th scope="col">MUSIQ &uarr;</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Standard P2S</th><td>7.397</td><td>46.554</td></tr>
+                  <tr class="ours"><th scope="row">Depth-Aware (Ours)</th><td>6.980</td><td>51.996</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gallery-section" aria-labelledby="gallery-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Visual Evidence</p>
+          <h2 id="gallery-title">Qualitative Results</h2>
+          <p>
+            Comparisons focus on the two visible failure modes of turbulence:
+            smeared fine texture and warped structural contours.
+          </p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="figure-card zoomable wide">
+            <button class="figure-button" type="button" data-lightbox-src="assets/img/synthetic-comparison.png" data-lightbox-alt="Synthetic qualitative comparison across competing methods and D2Turb.">
+              <img src="assets/img/synthetic-comparison.png" alt="Synthetic qualitative comparison across competing methods and D2Turb." loading="lazy">
+              <span>Inspect synthetic comparison</span>
+            </button>
+            <figcaption>Synthetic evaluation: text and rigid contours reveal residual warp and over-smoothing.</figcaption>
+          </figure>
+          <figure class="figure-card zoomable wide">
+            <button class="figure-button" type="button" data-lightbox-src="assets/img/real-comparison.png" data-lightbox-alt="Real-world qualitative comparison on turbulence images.">
+              <img src="assets/img/real-comparison.png" alt="Real-world qualitative comparison on turbulence images." loading="lazy">
+              <span>Inspect real-world comparison</span>
+            </button>
+            <figcaption>Real-world evaluation: severe deformations and structural tears remain visible in baselines.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="ablations" class="section ablation-section" aria-labelledby="ablation-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Analysis</p>
+          <h2 id="ablation-title">Ablation Studies</h2>
+          <p>Both targeted feature injection and multi-stage supervision contribute to the final restoration behavior.</p>
+        </div>
+        <div class="two-column tables">
+          <article class="table-card">
+            <div class="table-title">
+              <h3>Feature Injection</h3>
+              <p>Synthetic and real-world evaluation.</p>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr><th scope="col">Variant</th><th scope="col">PSNR &uarr;</th><th scope="col">SSIM &uarr;</th><th scope="col">LPIPS &darr;</th><th scope="col">NIQE &darr;</th><th scope="col">MUSIQ &uarr;</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Pure Cascade</th><td>25.417</td><td>0.725</td><td>0.225</td><td>6.845</td><td>51.842</td></tr>
+                  <tr><th scope="row">Simple Concat</th><td>25.504</td><td>0.730</td><td>0.221</td><td>6.921</td><td>52.520</td></tr>
+                  <tr class="ours"><th scope="row">ASPI (Ours)</th><td>25.724</td><td>0.736</td><td>0.208</td><td>6.653</td><td>52.815</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+          <article class="table-card">
+            <div class="table-title">
+              <h3>Training Supervision</h3>
+              <p>Using the Restormer backbone.</p>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr><th scope="col">Objective</th><th scope="col">PSNR &uarr;</th><th scope="col">SSIM &uarr;</th><th scope="col">LPIPS &darr;</th><th scope="col">NIQE &darr;</th><th scope="col">MUSIQ &uarr;</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Without deblur loss</th><td>25.536</td><td>0.725</td><td>0.221</td><td>6.866</td><td>52.455</td></tr>
+                  <tr><th scope="row">Without flow loss</th><td>25.372</td><td>0.722</td><td>0.229</td><td>6.827</td><td>51.498</td></tr>
+                  <tr class="ours"><th scope="row">Full Objective</th><td>25.724</td><td>0.736</td><td>0.208</td><td>6.653</td><td>52.815</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+        <figure class="figure-card zoomable feature-figure">
+          <button class="figure-button" type="button" data-lightbox-src="assets/img/aspi-features.png" data-lightbox-alt="Feature visualization comparing structural representations before and after ASPI.">
+            <img src="assets/img/aspi-features.png" alt="Feature visualization comparing structural representations before and after ASPI." loading="lazy">
+            <span>Inspect ASPI features</span>
+          </button>
+          <figcaption>ASPI feature visualization: activated structural priors align around warped boundaries.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section depth-evidence" aria-labelledby="simulation-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Simulation Study</p>
+          <h2 id="simulation-title">Why depth modulation matters</h2>
+        </div>
+        <div class="split-media">
+          <article class="table-card">
+            <div class="table-title"><h3>Depth Modulation Strategies</h3><p>Real-world RLR-AT evaluation with TurbNet.</p></div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Strategy</th><th scope="col">NIQE &darr;</th><th scope="col">MUSIQ &uarr;</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Uniform Flat-Field</th><td>7.397</td><td>46.554</td></tr>
+                  <tr><th scope="row">V1 - Direct Linear</th><td>7.181</td><td>47.712</td></tr>
+                  <tr><th scope="row">V2 - Linear with Offset</th><td class="second">6.952</td><td>50.304</td></tr>
+                  <tr><th scope="row">V3 - Kolmogorov 3/5</th><td>7.207</td><td>51.484</td></tr>
+                  <tr class="ours"><th scope="row">Kolmogorov 3/5 + Offset</th><td>6.980</td><td>51.996</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+          <figure class="figure-card zoomable">
+            <button class="figure-button" type="button" data-lightbox-src="assets/img/depth-mapping-comparison.png" data-lightbox-alt="Qualitative comparison of depth modulation strategies.">
+              <img src="assets/img/depth-mapping-comparison.png" alt="Qualitative comparison of depth modulation strategies." loading="lazy">
+              <span>Inspect modulation study</span>
+            </button>
+            <figcaption>Qualitative depth-modulation comparison reported in the supplementary study.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section generality-section" aria-labelledby="generality-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Generality And Cost</p>
+          <h2 id="generality-title">Benefits across restoration backbones</h2>
+        </div>
+        <div class="two-column tables">
+          <article class="table-card">
+            <div class="table-title"><h3>Backbone Comparison</h3><p>Synthetic and real-world averages.</p></div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Method</th><th scope="col">PSNR &uarr;</th><th scope="col">SSIM &uarr;</th><th scope="col">LPIPS &darr;</th><th scope="col">NIQE &darr;</th><th scope="col">MUSIQ &uarr;</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Restormer</th><td>25.521</td><td>0.730</td><td>0.257</td><td>6.995</td><td>50.705</td></tr>
+                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb + Restormer</th><td>25.724</td><td>0.736</td><td>0.208</td><td>6.653</td><td>52.815</td></tr>
+                  <tr><th scope="row">FocalNet</th><td>25.503</td><td>0.724</td><td>0.292</td><td>7.285</td><td>46.471</td></tr>
+                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb + FocalNet</th><td>25.464</td><td>0.727</td><td>0.225</td><td>6.887</td><td>53.023</td></tr>
+                  <tr><th scope="row">AdaIR</th><td>25.533</td><td>0.730</td><td>0.258</td><td>6.933</td><td>51.135</td></tr>
+                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb + AdaIR</th><td>25.712</td><td>0.736</td><td>0.210</td><td>6.892</td><td>52.317</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+          <article class="table-card">
+            <div class="table-title"><h3>Efficiency At 256 x 256</h3><p>Measured on one NVIDIA RTX 4060 Ti.</p></div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Method</th><th scope="col">Params (M)</th><th scope="col">FLOPs (G)</th><th scope="col">Latency (ms)</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">AT-Net</th><td>3.05</td><td>83.10</td><td>146.78</td></tr>
+                  <tr><th scope="row">TurbNet</th><td>26.57</td><td>171.97</td><td>206.58</td></tr>
+                  <tr><th scope="row">TMT</th><td>22.75</td><td>102.97</td><td>321.30</td></tr>
+                  <tr><th scope="row">Restormer</th><td>26.13</td><td>141.75</td><td>168.52</td></tr>
+                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb + Restormer</th><td>31.82</td><td>150.51</td><td>171.02</td></tr>
+                  <tr><th scope="row">FocalNet</th><td>6.77</td><td>52.88</td><td>11.20</td></tr>
+                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb + FocalNet</th><td>12.46</td><td>61.38</td><td>13.81</td></tr>
+                  <tr><th scope="row">AdaIR</th><td>28.74</td><td>147.18</td><td>178.74</td></tr>
+                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb + AdaIR</th><td>34.43</td><td>155.95</td><td>183.45</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="limitations" class="section limitations-section" aria-labelledby="limitations-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Boundaries</p>
+          <h2 id="limitations-title">Limitations</h2>
+          <p>The reported study identifies two important failure regimes rather than treating all severe inputs as recoverable.</p>
+        </div>
+        <div class="limitations-grid">
+          <article class="limitation">
+            <figure class="figure-card zoomable">
+              <button class="figure-button" type="button" data-lightbox-src="assets/img/limitations-depth.png" data-lightbox-alt="Simulation limitation caused by estimated depth errors on a thin structure.">
+                <img src="assets/img/limitations-depth.png" alt="Simulation limitation caused by estimated depth errors on a thin structure." loading="lazy">
+                <span>View example</span>
+              </button>
+            </figure>
+            <h3>Depth estimation boundaries</h3>
+            <p>Fine structures may receive inaccurate depth assignments, causing localized physical mismatch during synthesis.</p>
+          </article>
+          <article class="limitation">
+            <figure class="figure-card zoomable">
+              <button class="figure-button" type="button" data-lightbox-src="assets/img/limitations-extreme.png" data-lightbox-alt="Extreme turbulence examples where information is severely lost.">
+                <img src="assets/img/limitations-extreme.png" alt="Extreme turbulence examples where information is severely lost." loading="lazy">
+                <span>View example</span>
+              </button>
+            </figure>
+            <h3>Irrecoverable information loss</h3>
+            <p>Under extreme turbulence, details can be destroyed rather than displaced, limiting any single-frame restoration system.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="resources" class="section resources-section" aria-labelledby="resources-title">
+      <div class="container resources-grid">
+        <div>
+          <p class="eyebrow">Resources</p>
+          <h2 id="resources-title">Paper and Citation</h2>
+          <p class="resource-note">
+            The arXiv and supplementary buttons currently use explicit
+            placeholder URLs and will be updated once the preprint record is
+            available. This page reports the figures and numerical results
+            contained in the manuscript and its supplementary material.
+          </p>
+          <div class="actions resource-actions" aria-label="External resources">
+            <a class="button primary placeholder" href="https://arxiv.org/abs/XXXX.XXXXX">arXiv placeholder</a>
+            <a class="button" href="https://github.com/HertzDot222/D2Turb">GitHub repository</a>
+          </div>
+        </div>
+        <div class="citation-card">
+          <h3>Citation</h3>
+          <pre><code>@article{d2turb,
+  title = {D2Turb: Depth-Aware Simulation and Decoupled
+           Learning for Single-Frame Atmospheric Turbulence Mitigation},
+  note = {arXiv preprint, citation to be updated}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>D<sup>2</sup>Turb project page. Figures and values are reproduced from the accompanying manuscript.</p>
+    </div>
+  </footer>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Expanded figure viewer" hidden>
+    <button class="lightbox-close" type="button" aria-label="Close expanded figure">&times;</button>
+    <img class="lightbox-image" src="" alt="">
+  </div>
+</body>
+</html>
