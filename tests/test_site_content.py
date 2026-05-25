@@ -51,6 +51,7 @@ class ProjectPageContractTest(unittest.TestCase):
             content = (ROOT / public_file).read_text(encoding="utf-8").lower()
             for marker in private_markers:
                 self.assertNotIn(marker, content)
+            self.assertNotIn("placeholder", content)
 
     def test_required_figure_assets_are_published(self):
         for name in (
@@ -86,48 +87,66 @@ class ProjectPageContractTest(unittest.TestCase):
     def test_readme_is_a_public_project_landing_page(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         for marker in (
+            "# D2Turb",
             "https://hertzdot222.github.io/D2Turb/",
-            "https://arxiv.org/abs/XXXX.XXXXX",
-            "https://example.com/dataset-placeholder",
-            "https://example.com/model-placeholder",
-            "code/d2turb_demo.py",
-            "Simplified Demo",
+            "[Paper]()",
+            "[Dataset]()",
+            "[Pretrained Models]()",
+            "code/models/d2turb_restormer.py",
         ):
             self.assertIn(marker, readme)
+        for marker in ("<sup>", "Simplified Demo Code", "placeholder"):
+            self.assertNotIn(marker, readme)
         self.assertTrue((ROOT / ".nojekyll").exists())
 
-    def test_resource_links_include_placeholders_and_repository(self):
+    def test_page_resource_links_are_clean_and_include_repository(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
-        self.assertIn("https://arxiv.org/abs/XXXX.XXXXX", html)
-        self.assertIn("https://arxiv.org/pdf/XXXX.XXXXX", html)
+        self.assertIn(">Paper</a>", html)
+        self.assertIn(">Supplement</a>", html)
         self.assertIn("https://github.com/HertzDot222/D2Turb", html)
 
-    def test_simplified_demo_code_is_published(self):
-        source_path = ROOT / "code" / "d2turb_demo.py"
+    def test_restormer_d2turb_model_code_is_published(self):
+        old_demo = ROOT / "code" / "d2turb_demo.py"
+        package_path = ROOT / "code" / "models" / "__init__.py"
+        restormer_path = ROOT / "code" / "models" / "restormer.py"
+        source_path = ROOT / "code" / "models" / "d2turb_restormer.py"
         requirements_path = ROOT / "code" / "requirements.txt"
+        self.assertFalse(old_demo.exists())
+        self.assertTrue(package_path.exists())
+        self.assertTrue(restormer_path.exists())
         self.assertTrue(source_path.exists())
         self.assertTrue(requirements_path.exists())
+        restormer_source = restormer_path.read_text(encoding="utf-8")
         source = source_path.read_text(encoding="utf-8")
-        for marker in (
-            "class TextureDeblur",
-            "class ASPI",
-            "class TiltRectifier",
-            "class D2TurbDemo",
-            "simplified architecture demonstration",
-        ):
+        self.assertIn("class Restormer", restormer_source)
+        for marker in ("from .restormer import Restormer", "class ASPI", "class TiltRectifier", "class D2TurbRestormer"):
             self.assertIn(marker, source)
+        self.assertIn("return_features=True", source)
         self.assertIn("torch>=2.1", requirements_path.read_text(encoding="utf-8"))
 
     @unittest.skipUnless(importlib.util.find_spec("torch"), "PyTorch is not installed in the test runtime.")
-    def test_simplified_demo_runs_forward_pass_when_torch_is_available(self):
+    def test_restormer_d2turb_runs_forward_pass_when_torch_is_available(self):
         completed = subprocess.run(
-            [sys.executable, str(ROOT / "code" / "d2turb_demo.py")],
+            [
+                sys.executable,
+                "-c",
+                (
+                    "import sys; "
+                    "sys.path.insert(0, 'code'); "
+                    "import torch; "
+                    "from models import D2TurbRestormer; "
+                    "model = D2TurbRestormer().eval(); "
+                    "image = torch.rand(1, 3, 32, 32); "
+                    "outputs = model(image); "
+                    "print(tuple(outputs['restored'].shape))"
+                ),
+            ],
+            cwd=ROOT,
             capture_output=True,
             check=True,
             text=True,
         )
-        self.assertIn("deblurred: (1, 3, 128, 128)", completed.stdout)
-        self.assertIn("restored: (1, 3, 128, 128)", completed.stdout)
+        self.assertIn("(1, 3, 32, 32)", completed.stdout)
 
 
 if __name__ == "__main__":

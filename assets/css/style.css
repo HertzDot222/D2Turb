@@ -220,10 +220,6 @@ figure {
   transform: translateY(-1px);
 }
 
-.button.placeholder {
-  border-style: dashed;
-}
-
 .button.disabled {
   opacity: 0.7;
   cursor: default;
