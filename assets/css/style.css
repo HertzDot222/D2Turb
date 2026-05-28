@@ -151,9 +151,10 @@ figure {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 330px;
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
-  gap: 68px;
+  max-width: 920px;
+  gap: 34px;
 }
 
 .eyebrow {
@@ -223,55 +224,6 @@ figure {
 .button.disabled {
   opacity: 0.7;
   cursor: default;
-}
-
-.hero-evidence {
-  padding: 22px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: var(--shadow);
-}
-
-.reported {
-  margin-bottom: 16px;
-  color: var(--muted);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.metric-card {
-  padding: 17px;
-  border-radius: 13px;
-  background: var(--surface-soft);
-}
-
-.metric-card strong {
-  display: block;
-  color: var(--accent-deep);
-  font-size: 2rem;
-  line-height: 1.05;
-  letter-spacing: -0.05em;
-}
-
-.metric-card span {
-  display: block;
-  margin-top: 7px;
-  color: var(--muted);
-  font-size: 0.82rem;
-}
-
-.metric-pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.metric-pair strong {
-  font-size: 1.48rem;
 }
 
 .section {
@@ -389,20 +341,31 @@ figure {
 }
 
 .result-callouts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.result-callouts article {
+  padding: 16px 18px;
+  border: 1px solid #cbdcf1;
+  border-radius: 16px;
+  background: var(--accent-soft);
+}
+
+.result-callouts strong {
+  display: block;
+  color: var(--accent-deep);
+  font-size: 0.94rem;
+  line-height: 1.35;
 }
 
 .result-callouts p {
-  padding: 10px 15px;
-  color: var(--accent-deep);
-  font-size: 0.9rem;
-  font-weight: 600;
-  border: 1px solid #cbdcf1;
-  border-radius: 999px;
-  background: var(--accent-soft);
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 0.87rem;
+  line-height: 1.55;
 }
 
 .table-card {
@@ -650,12 +613,9 @@ summary {
     gap: 34px;
   }
 
-  .hero-evidence {
-    max-width: 420px;
-  }
-
   .pillars,
-  .two-column {
+  .two-column,
+  .result-callouts {
     grid-template-columns: 1fr;
   }
 }

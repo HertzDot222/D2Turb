@@ -15,9 +15,9 @@
       <a class="brand" href="#top">D<sup>2</sup>Turb</a>
       <div class="nav-links">
         <a href="#method">Method</a>
-        <a href="#results">Results</a>
-        <a href="#supplementary">Supplementary</a>
-        <a href="#ablations">Ablations</a>
+        <a href="#benchmarks">Benchmarks</a>
+        <a href="#visuals">Visuals</a>
+        <a href="#analysis">Mechanism</a>
         <a href="#resources">Resources</a>
       </div>
     </nav>
@@ -41,23 +41,6 @@
             <a class="button" href="https://github.com/HertzDot222/D2Turb">GitHub</a>
           </div>
         </div>
-        <aside class="hero-evidence" aria-label="Headline reported results">
-          <p class="reported">Reported results</p>
-          <div class="metric-card">
-            <strong>0.208</strong>
-            <span>Synthetic Avg. LPIPS <small>lower is better</small></span>
-          </div>
-          <div class="metric-pair">
-            <div class="metric-card">
-              <strong>6.653</strong>
-              <span>RLR-AT NIQE <small>lower is better</small></span>
-            </div>
-            <div class="metric-card">
-              <strong>52.815</strong>
-              <span>RLR-AT MUSIQ <small>higher is better</small></span>
-            </div>
-          </div>
-        </aside>
       </div>
     </section>
 
@@ -116,26 +99,31 @@
       </div>
     </section>
 
-    <section id="results" class="section results-section" aria-labelledby="results-title">
+    <section id="benchmarks" class="section results-section" aria-labelledby="benchmarks-title">
       <div class="container">
         <div class="section-heading">
-          <p class="eyebrow">Evidence</p>
-          <h2 id="results-title">Quantitative Results</h2>
+          <p class="eyebrow">Evidence Map</p>
+          <h2 id="benchmarks-title">Benchmarks At A Glance</h2>
           <p>
-            The tables below reproduce the values reported in the paper. The
-            primary D<sup>2</sup>Turb setting uses Restormer as its texture
-            deblurring backbone.
+            Read this section as the numerical backbone of the page: first the
+            main synthetic and real-world comparisons, then the specialized
+            TMT-Static and TurbText checks. The primary D<sup>2</sup>Turb
+            setting uses Restormer as its texture deblurring backbone.
           </p>
         </div>
 
         <div class="result-callouts">
           <article>
-            <strong>19% relative LPIPS reduction</strong>
-            <p>Compared with the second-best average synthetic LPIPS reported in the main comparison (0.257 to 0.208).</p>
+            <strong>Main restoration benchmarks</strong>
+            <p>Synthetic, RLR-AT, and depth-aware simulation scores establish the core restoration gains.</p>
           </article>
           <article>
-            <strong>Best real-world scores</strong>
-            <p>D<sup>2</sup>Turb reports the lowest NIQE and highest MUSIQ on RLR-AT among compared methods.</p>
+            <strong>Specialized stress checks</strong>
+            <p>TMT-Static and TurbText isolate static-scene fidelity and text-region consistency without reporting recognition-backbone scores.</p>
+          </article>
+          <article>
+            <strong>Mechanism evidence follows</strong>
+            <p>Flow inversion, ASPI, depth noise, and backbone studies explain where the improvements come from.</p>
           </article>
         </div>
 
@@ -234,14 +222,48 @@
             </div>
           </article>
         </div>
+
+        <article class="table-card full-width-table">
+          <div class="table-title">
+            <h3>TMT-Static And TurbText</h3>
+            <p>Static-scene fidelity and text-region distortion metrics.</p>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Method</th>
+                  <th scope="col">TMT-Static PSNR &uarr;</th>
+                  <th scope="col">TMT-Static SSIM &uarr;</th>
+                  <th scope="col">TMT-Static LPIPS &darr;</th>
+                  <th scope="col">TurbText AWDR &uarr;</th>
+                  <th scope="col">TurbText AD-LCS &uarr;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">AT-Net</th><td>22.610</td><td>0.799</td><td>0.480</td><td>0.662</td><td>6.197</td></tr>
+                <tr><th scope="row">TurbNet (Official)</th><td>22.763</td><td>0.823</td><td>0.401</td><td>0.758</td><td>7.314</td></tr>
+                <tr><th scope="row">TurbNet</th><td>24.122</td><td>0.847</td><td>0.316</td><td>0.771</td><td>9.428</td></tr>
+                <tr><th scope="row">TMT (Official)</th><td>23.709</td><td>0.843</td><td>0.279</td><td>0.794</td><td>8.682</td></tr>
+                <tr><th scope="row">TMT</th><td>24.019</td><td>0.848</td><td>0.289</td><td>0.796</td><td>8.673</td></tr>
+                <tr><th scope="row">FocalNet</th><td>24.054</td><td>0.847</td><td>0.309</td><td>0.737</td><td>7.662</td></tr>
+                <tr class="ours"><th scope="row">D<sup>2</sup>Turb + FocalNet</th><td>24.234</td><td>0.858</td><td>0.248</td><td>0.779</td><td>8.282</td></tr>
+                <tr><th scope="row">Restormer</th><td>24.072</td><td>0.859</td><td>0.286</td><td>0.746</td><td>8.084</td></tr>
+                <tr class="ours"><th scope="row">D<sup>2</sup>Turb + Restormer</th><td>24.319</td><td>0.871</td><td>0.222</td><td>0.768</td><td>8.152</td></tr>
+                <tr><th scope="row">AdaIR</th><td>24.071</td><td>0.849</td><td>0.285</td><td>0.742</td><td>8.524</td></tr>
+                <tr class="ours"><th scope="row">D<sup>2</sup>Turb + AdaIR</th><td>24.321</td><td>0.862</td><td>0.223</td><td>0.782</td><td>8.708</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section class="section gallery-section" aria-labelledby="gallery-title">
+    <section id="visuals" class="section gallery-section" aria-labelledby="visuals-title">
       <div class="container">
         <div class="section-heading">
           <p class="eyebrow">Visual Evidence</p>
-          <h2 id="gallery-title">Qualitative Results</h2>
+          <h2 id="visuals-title">What to inspect in the figures</h2>
           <p>
             Comparisons focus on the two visible failure modes of turbulence:
             smeared fine texture and warped structural contours.
@@ -266,16 +288,16 @@
       </div>
     </section>
 
-    <section id="supplementary" class="section supplementary-section" aria-labelledby="supplementary-title">
+    <section id="analysis" class="section supplementary-section" aria-labelledby="analysis-title">
       <div class="container">
         <div class="section-heading">
-          <p class="eyebrow">Supplementary Evidence</p>
-          <h2 id="supplementary-title">Additional visual and geometric checks</h2>
+          <p class="eyebrow">Mechanism And Ablations</p>
+          <h2 id="analysis-title">Why the gains are not just another backbone</h2>
           <p>
-            The supplementary material further isolates the geometric rectifier,
-            verifies flow inversion supervision, and shows that the decoupled
-            framework improves multiple restoration backbones rather than a
-            single hand-picked model.
+            These checks isolate the geometric rectifier, verify flow inversion
+            supervision, test depth-noise robustness, and show that the
+            decoupled framework improves multiple restoration backbones rather
+            than a single hand-picked model.
           </p>
         </div>
 

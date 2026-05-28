@@ -25,26 +25,37 @@ class LocalAssetParser(HTMLParser):
 
 
 class ProjectPageContractTest(unittest.TestCase):
-    def test_page_has_evidence_sections_and_reported_metrics(self):
+    def test_page_has_reader_guided_evidence_sections_and_metrics(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
         for marker in (
             "Depth-Aware Simulation",
-            "Quantitative Results",
-            "Qualitative Results",
-            "Supplementary Evidence",
+            "Benchmarks At A Glance",
+            "Visual Evidence",
+            "Mechanism And Ablations",
             "Rectifier Design",
             "Backbone Visual Comparisons",
             "Depth Noise Robustness",
             "Flow-Guided Unwarping",
             "TurbText OCR Qualitative Check",
             "Ablation Studies",
+            "TMT-Static",
+            "AWDR",
+            "AD-LCS",
             "0.208",
             "6.653",
             "52.815",
             "30.001",
             "51.222",
+            "24.321",
+            "0.782",
+            "8.708",
         ):
             self.assertIn(marker, html)
+
+    def test_hero_metric_summary_card_is_not_published(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        for marker in ("hero-evidence", "Reported results", "Synthetic Avg. LPIPS"):
+            self.assertNotIn(marker, html)
 
     def test_public_copy_is_publication_facing(self):
         encoded_markers = (
@@ -83,8 +94,10 @@ class ProjectPageContractTest(unittest.TestCase):
         self.assertNotIn("limitations-depth.png", html)
         self.assertNotIn("limitations-extreme.png", html)
 
-    def test_turbtext_recognition_metric_table_is_not_published(self):
+    def test_turbtext_public_metrics_exclude_recognition_backbones(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
+        for marker in ("TurbText", "AWDR", "AD-LCS"):
+            self.assertIn(marker, html)
         for marker in ("CRNN", "DAN", "ASTER"):
             self.assertNotIn(marker, html)
 
