@@ -343,6 +343,53 @@
         </article>
 
         <div class="subsection-heading">
+          <p class="eyebrow">Stress Checks</p>
+          <h3>Robustness beyond clean depth and generic image metrics</h3>
+          <p>
+            Additional material tests whether the simulation still helps when
+            training depth is noisy and whether the learned flow visibly reduces
+            geometric distortion before the final restoration.
+          </p>
+        </div>
+        <div class="two-column tables">
+          <article class="table-card">
+            <div class="table-title">
+              <h3>Depth Noise Robustness</h3>
+              <p>Training-time depth perturbation study.</p>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr><th scope="col">Training Simulation</th><th scope="col">NIQE &darr;</th><th scope="col">MUSIQ &uarr;</th><th scope="col">PSNR &uarr;</th><th scope="col">SSIM &uarr;</th><th scope="col">LPIPS &darr;</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Flat-field Standard P2S</th><td>7.397</td><td>46.554</td><td>23.046</td><td>0.641</td><td>0.358</td></tr>
+                  <tr class="ours"><th scope="row">Ours</th><td>6.980</td><td>51.996</td><td>24.057</td><td>0.671</td><td>0.281</td></tr>
+                  <tr><th scope="row">Ours + Noise, sigma^2 = 0.01</th><td>7.078</td><td>51.222</td><td>24.029</td><td>0.669</td><td>0.299</td></tr>
+                  <tr><th scope="row">Ours + Noise, sigma^2 = 0.05</th><td>7.090</td><td>50.101</td><td>23.787</td><td>0.665</td><td>0.319</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <figure class="figure-card zoomable">
+            <button class="figure-button" type="button" data-lightbox-src="assets/img/flow-unwrapping-qualitative.png" data-lightbox-alt="Qualitative flow-guided unwarping comparison on TMT-static and RLR-AT examples.">
+              <img src="assets/img/flow-unwrapping-qualitative.png" alt="Qualitative flow-guided unwarping comparison on TMT-static and RLR-AT examples." loading="lazy">
+              <span>Inspect flow-guided unwarping</span>
+            </button>
+            <figcaption>Flow-Guided Unwarping: the predicted flow provides an explicit geometric correction before the final output.</figcaption>
+          </figure>
+        </div>
+
+        <figure class="figure-card zoomable feature-figure">
+          <button class="figure-button" type="button" data-lightbox-src="assets/img/turbtext-ocr-qualitative.png" data-lightbox-alt="TurbText OCR qualitative check showing restored text regions without recognition metric values.">
+            <img src="assets/img/turbtext-ocr-qualitative.png" alt="TurbText OCR qualitative check showing restored text regions without recognition metric values." loading="lazy">
+            <span>Inspect text-region qualitative check</span>
+          </button>
+          <figcaption>TurbText OCR Qualitative Check: restored text regions become more legible; recognition metric values are intentionally omitted here.</figcaption>
+        </figure>
+
+        <div class="subsection-heading">
           <p class="eyebrow">Backbone Visual Comparisons</p>
           <h3>Decoupling improves both synthetic and real-world outputs</h3>
           <p>

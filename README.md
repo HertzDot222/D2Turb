@@ -22,7 +22,7 @@ the Restormer restoration stage into the geometric rectifier.
 - **Decoupled restoration:** separates texture restoration from geometric correction.
 - **Structural guidance:** ASPI injects Restormer features into the rectification stage.
 - **Inference structure:** public Restormer-based D2Turb model definitions are provided in [`code/models/`](code/models/).
-- **Supplementary evidence:** the project page includes additional rectifier, flow inversion, and cross-backbone visual studies.
+- **Supplementary evidence:** the project page includes additional rectifier, flow inversion, depth-noise, OCR qualitative, and cross-backbone visual studies.
 
 ## Reported Results
 

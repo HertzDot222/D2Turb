@@ -32,6 +32,11 @@ CROPS = (
     {"filename": "depth-mapping-comparison.png", "source": "supp", "page": 8, "box": (0.08, 0.292, 0.92, 0.95)},
 )
 
+EXTRA_CROPS = (
+    {"filename": "turbtext-ocr-qualitative.png", "source": "extra", "page": 1, "box": (0.095, 0.808, 0.482, 0.884), "zoom": 4.0},
+    {"filename": "flow-unwrapping-qualitative.png", "source": "extra", "page": 1, "box": (0.517, 0.718, 0.905, 0.884), "zoom": 4.0},
+)
+
 
 def render_clip(pdf_path: Path, page_number: int, destination: Path, box=None, zoom: float = 2.8) -> None:
     document = pymupdf.open(pdf_path)
@@ -62,12 +67,16 @@ def render_previews(main_pdf: Path, supplement_pdf: Path) -> None:
             print(f"preview: {output}")
 
 
-def extract_figures(main_pdf: Path, supplement_pdf: Path) -> None:
+def extract_figures(main_pdf: Path, supplement_pdf: Path, extra_pdf: Path | None = None) -> None:
     sources = {"main": main_pdf, "supp": supplement_pdf}
+    crop_items = list(CROPS)
+    if extra_pdf is not None:
+        sources["extra"] = extra_pdf
+        crop_items.extend(EXTRA_CROPS)
     image_dir = ROOT / "assets" / "img"
-    for item in CROPS:
+    for item in crop_items:
         output = image_dir / item["filename"]
-        render_clip(sources[item["source"]], item["page"], output, item["box"])
+        render_clip(sources[item["source"]], item["page"], output, item["box"], zoom=item.get("zoom", 2.8))
         print(f"figure: {output}")
 
 
@@ -75,13 +84,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("main_pdf", type=Path)
     parser.add_argument("supplement_pdf", type=Path)
+    parser.add_argument("--extra-pdf", type=Path, default=None, help="Optional extra material PDF for additional crops.")
     parser.add_argument("--preview", action="store_true", help="Render full reference pages for crop selection.")
     args = parser.parse_args()
 
     if args.preview:
         render_previews(args.main_pdf, args.supplement_pdf)
         return
-    extract_figures(args.main_pdf, args.supplement_pdf)
+    extract_figures(args.main_pdf, args.supplement_pdf, args.extra_pdf)
 
 
 if __name__ == "__main__":

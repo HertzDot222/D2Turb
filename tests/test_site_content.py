@@ -34,11 +34,15 @@ class ProjectPageContractTest(unittest.TestCase):
             "Supplementary Evidence",
             "Rectifier Design",
             "Backbone Visual Comparisons",
+            "Depth Noise Robustness",
+            "Flow-Guided Unwarping",
+            "TurbText OCR Qualitative Check",
             "Ablation Studies",
             "0.208",
             "6.653",
             "52.815",
             "30.001",
+            "51.222",
         ):
             self.assertIn(marker, html)
 
@@ -64,6 +68,8 @@ class ProjectPageContractTest(unittest.TestCase):
             "real-comparison.png",
             "backbone-synthetic-comparison.png",
             "backbone-real-comparison.png",
+            "flow-unwrapping-qualitative.png",
+            "turbtext-ocr-qualitative.png",
             "aspi-features.png",
             "depth-mapping-comparison.png",
         ):
@@ -76,6 +82,11 @@ class ProjectPageContractTest(unittest.TestCase):
         self.assertNotIn("Limitations", html)
         self.assertNotIn("limitations-depth.png", html)
         self.assertNotIn("limitations-extreme.png", html)
+
+    def test_turbtext_recognition_metric_table_is_not_published(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        for marker in ("CRNN", "DAN", "ASTER"):
+            self.assertNotIn(marker, html)
 
     def test_visual_and_interaction_assets_are_implemented(self):
         css = (ROOT / "assets" / "css" / "style.css").read_text(encoding="utf-8")
