@@ -16,6 +16,7 @@
       <div class="nav-links">
         <a href="#method">Method</a>
         <a href="#results">Results</a>
+        <a href="#supplementary">Supplementary</a>
         <a href="#ablations">Ablations</a>
         <a href="#limitations">Limitations</a>
         <a href="#resources">Resources</a>
@@ -36,8 +37,8 @@
             to recover sharp texture and rectify non-rigid geometry.
           </p>
           <div class="actions" aria-label="Project resources">
-            <a class="button primary" href="#" aria-label="Paper">Paper</a>
-            <a class="button" href="#" aria-label="Supplement">Supplement</a>
+            <a class="button primary" href="https://arxiv.org/abs/2605.27460" aria-label="Paper on arXiv">Paper</a>
+            <span class="button disabled" aria-disabled="true">Supplement</span>
             <a class="button" href="https://github.com/HertzDot222/D2Turb">GitHub</a>
           </div>
         </div>
@@ -266,6 +267,109 @@
       </div>
     </section>
 
+    <section id="supplementary" class="section supplementary-section" aria-labelledby="supplementary-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Supplementary Evidence</p>
+          <h2 id="supplementary-title">Additional visual and geometric checks</h2>
+          <p>
+            The supplementary material further isolates the geometric rectifier,
+            verifies flow inversion supervision, and shows that the decoupled
+            framework improves multiple restoration backbones rather than a
+            single hand-picked model.
+          </p>
+        </div>
+
+        <div class="two-column tables">
+          <article class="table-card">
+            <div class="table-title">
+              <h3>Rectifier Design</h3>
+              <p>Geometry-only ablation using intermediate tilt inputs.</p>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr><th scope="col">Configuration</th><th scope="col">Params (M)</th><th scope="col">PSNR &uarr;</th><th scope="col">SSIM &uarr;</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">3 Downsamples</th><td>0.564</td><td>25.754</td><td>0.770</td></tr>
+                  <tr><th scope="row">4 Downsamples</th><td>3.923</td><td>26.402</td><td>0.790</td></tr>
+                  <tr><th scope="row">Bottleneck with ResBlocks</th><td>9.233</td><td>26.878</td><td>0.798</td></tr>
+                  <tr><th scope="row">Direct Normalized Flow [-1,1]</th><td>5.693</td><td>26.743</td><td>0.794</td></tr>
+                  <tr class="ours"><th scope="row">Ours (Default)</th><td>5.693</td><td>26.875</td><td>0.798</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="table-card">
+            <div class="table-title">
+              <h3>Flow Inversion Supervision</h3>
+              <p>Warping intermediate tilt images back to clean coordinates.</p>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr><th scope="col">Inversion Method</th><th scope="col">MSE &darr;</th><th scope="col">PSNR &uarr;</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">Standard Direct Inversion</th><td>0.001436</td><td>29.774</td></tr>
+                  <tr class="ours"><th scope="row">Density-based Splatting</th><td>0.001349</td><td>30.001</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+
+        <article class="table-card full-width-table">
+          <div class="table-title">
+            <h3>Mutual Promotion In Joint Training</h3>
+            <p>Intermediate deblurring target on the synthetic dataset.</p>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th scope="col">Deblurring Module Optimization</th><th scope="col">PSNR &uarr;</th><th scope="col">SSIM &uarr;</th><th scope="col">LPIPS &darr;</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Standalone Deblur (Restormer)</th><td>28.427</td><td>0.810</td><td>0.215</td></tr>
+                <tr class="ours"><th scope="row">Joint Deblur within D2Turb</th><td>28.570</td><td>0.818</td><td>0.188</td></tr>
+                <tr><th scope="row">Standalone Deblur (FocalNet)</th><td>28.442</td><td>0.814</td><td>0.226</td></tr>
+                <tr class="ours"><th scope="row">Joint Deblur within D2Turb</th><td>28.494</td><td>0.815</td><td>0.218</td></tr>
+                <tr><th scope="row">Standalone Deblur (AdaIR)</th><td>28.434</td><td>0.810</td><td>0.215</td></tr>
+                <tr class="ours"><th scope="row">Joint Deblur within D2Turb</th><td>28.571</td><td>0.819</td><td>0.189</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <div class="subsection-heading">
+          <p class="eyebrow">Backbone Visual Comparisons</p>
+          <h3>Decoupling improves both synthetic and real-world outputs</h3>
+          <p>
+            Across Restormer, FocalNet, and AdaIR, the D2Turb wrapper reduces
+            residual warping while preserving sharper local structures.
+          </p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="figure-card zoomable wide">
+            <button class="figure-button" type="button" data-lightbox-src="assets/img/backbone-synthetic-comparison.png" data-lightbox-alt="Supplementary synthetic qualitative comparison across Restormer, FocalNet, AdaIR, and their D2Turb variants.">
+              <img src="assets/img/backbone-synthetic-comparison.png" alt="Supplementary synthetic qualitative comparison across Restormer, FocalNet, AdaIR, and their D2Turb variants." loading="lazy">
+              <span>Inspect backbone synthetic comparison</span>
+            </button>
+            <figcaption>Supplementary synthetic comparison: standalone backbones restore texture but leave visible non-rigid warp.</figcaption>
+          </figure>
+          <figure class="figure-card zoomable wide">
+            <button class="figure-button" type="button" data-lightbox-src="assets/img/backbone-real-comparison.png" data-lightbox-alt="Supplementary real-world qualitative comparison across Restormer, FocalNet, AdaIR, and their D2Turb variants.">
+              <img src="assets/img/backbone-real-comparison.png" alt="Supplementary real-world qualitative comparison across Restormer, FocalNet, AdaIR, and their D2Turb variants." loading="lazy">
+              <span>Inspect backbone real-world comparison</span>
+            </button>
+            <figcaption>Supplementary RLR-AT comparison: D2Turb variants produce straighter boundaries and cleaner local geometry.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
     <section id="ablations" class="section ablation-section" aria-labelledby="ablation-title">
       <div class="container">
         <div class="section-heading">
@@ -443,7 +547,7 @@
             manuscript and its supplementary material.
           </p>
           <div class="actions resource-actions" aria-label="External resources">
-            <a class="button primary" href="#">Paper</a>
+            <a class="button primary" href="https://arxiv.org/abs/2605.27460">Paper</a>
             <a class="button" href="https://github.com/HertzDot222/D2Turb">GitHub repository</a>
           </div>
         </div>
@@ -452,7 +556,8 @@
           <pre><code>@article{d2turb,
   title = {D2Turb: Depth-Aware Simulation and Decoupled
            Learning for Single-Frame Atmospheric Turbulence Mitigation},
-  note = {arXiv preprint, citation to be updated}
+  journal = {arXiv preprint arXiv:2605.27460},
+  year = {2026}
 }</code></pre>
         </div>
       </div>

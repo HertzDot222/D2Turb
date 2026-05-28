@@ -3,7 +3,7 @@
 **Depth-Aware Simulation and Decoupled Learning for Single-Frame Atmospheric Turbulence Mitigation**
 
 [Project Page](https://hertzdot222.github.io/D2Turb/) |
-[Paper]() |
+[Paper](https://arxiv.org/abs/2605.27460) |
 [Dataset]() |
 [Pretrained Models]() |
 [Code](code/models/d2turb_restormer.py)
@@ -22,6 +22,7 @@ the Restormer restoration stage into the geometric rectifier.
 - **Decoupled restoration:** separates texture restoration from geometric correction.
 - **Structural guidance:** ASPI injects Restormer features into the rectification stage.
 - **Inference structure:** public Restormer-based D2Turb model definitions are provided in [`code/models/`](code/models/).
+- **Supplementary evidence:** the project page includes additional rectifier, flow inversion, and cross-backbone visual studies.
 
 ## Reported Results
 
@@ -40,6 +41,7 @@ limitations are presented on the [project page](https://hertzdot222.github.io/D2
 @article{d2turb,
   title = {D2Turb: Depth-Aware Simulation and Decoupled Learning for
            Single-Frame Atmospheric Turbulence Mitigation},
-  note = {arXiv preprint, citation to be updated}
+  journal = {arXiv preprint arXiv:2605.27460},
+  year = {2026}
 }
 ```

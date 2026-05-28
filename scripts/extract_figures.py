@@ -27,6 +27,8 @@ CROPS = (
     {"filename": "synthetic-comparison.png", "source": "main", "page": 11, "box": (0.08, 0.055, 0.92, 0.66)},
     {"filename": "real-comparison.png", "source": "main", "page": 12, "box": (0.08, 0.055, 0.92, 0.60)},
     {"filename": "aspi-features.png", "source": "main", "page": 14, "box": (0.08, 0.055, 0.92, 0.48)},
+    {"filename": "backbone-synthetic-comparison.png", "source": "supp", "page": 10, "box": (0.075, 0.055, 0.925, 0.84)},
+    {"filename": "backbone-real-comparison.png", "source": "supp", "page": 11, "box": (0.075, 0.055, 0.925, 0.90)},
     {"filename": "depth-mapping-comparison.png", "source": "supp", "page": 8, "box": (0.08, 0.292, 0.92, 0.95)},
     {"filename": "limitations-depth.png", "source": "supp", "page": 14, "box": (0.08, 0.207, 0.92, 0.70)},
     {"filename": "limitations-extreme.png", "source": "supp", "page": 15, "box": (0.08, 0.055, 0.92, 0.46)},

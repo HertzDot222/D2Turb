@@ -31,11 +31,15 @@ class ProjectPageContractTest(unittest.TestCase):
             "Depth-Aware Simulation",
             "Quantitative Results",
             "Qualitative Results",
+            "Supplementary Evidence",
+            "Rectifier Design",
+            "Backbone Visual Comparisons",
             "Ablation Studies",
             "Limitations",
             "0.208",
             "6.653",
             "52.815",
+            "30.001",
         ):
             self.assertIn(marker, html)
 
@@ -59,6 +63,8 @@ class ProjectPageContractTest(unittest.TestCase):
             "framework.png",
             "synthetic-comparison.png",
             "real-comparison.png",
+            "backbone-synthetic-comparison.png",
+            "backbone-real-comparison.png",
             "aspi-features.png",
             "depth-mapping-comparison.png",
             "limitations-depth.png",
@@ -89,7 +95,7 @@ class ProjectPageContractTest(unittest.TestCase):
         for marker in (
             "# D2Turb",
             "https://hertzdot222.github.io/D2Turb/",
-            "[Paper]()",
+            "[Paper](https://arxiv.org/abs/2605.27460)",
             "[Dataset]()",
             "[Pretrained Models]()",
             "code/models/d2turb_restormer.py",
@@ -101,8 +107,9 @@ class ProjectPageContractTest(unittest.TestCase):
 
     def test_page_resource_links_are_clean_and_include_repository(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertIn("https://arxiv.org/abs/2605.27460", html)
         self.assertIn(">Paper</a>", html)
-        self.assertIn(">Supplement</a>", html)
+        self.assertIn(">Supplement</span>", html)
         self.assertIn("https://github.com/HertzDot222/D2Turb", html)
 
     def test_restormer_d2turb_model_code_is_published(self):
