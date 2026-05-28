@@ -126,9 +126,16 @@ class ProjectPageContractTest(unittest.TestCase):
             "[Dataset]()",
             "[Pretrained Models]()",
             "code/models/d2turb_restormer.py",
+            "## Results Snapshot",
+            "## Repository Structure",
+            "## Quick Start",
+            "TMT-Static",
+            "TurbText",
+            "AWDR",
+            "AD-LCS",
         ):
             self.assertIn(marker, readme)
-        for marker in ("<sup>", "Simplified Demo Code", "placeholder"):
+        for marker in ("<sup>", "Simplified Demo Code", "placeholder", "CRNN", "DAN", "ASTER", "recognition metric"):
             self.assertNotIn(marker, readme)
         self.assertTrue((ROOT / ".nojekyll").exists())
 

@@ -8,32 +8,82 @@
 [Pretrained Models]() |
 [Code](code/models/d2turb_restormer.py)
 
-D2Turb addresses single-frame atmospheric turbulence by separating texture
-restoration from non-rigid geometric rectification. A depth-aware simulation
-model provides spatially varying turbulence and intermediate tilt supervision,
-while Adaptive Structural Prior Injection (ASPI) transfers structural cues from
-the Restormer restoration stage into the geometric rectifier.
+D2Turb is a single-frame atmospheric turbulence mitigation framework that
+separates two coupled restoration problems: texture degradation and non-rigid
+geometric distortion. It uses depth-aware simulation to synthesize spatially
+varying turbulence and to provide intermediate tilt supervision, then applies a
+decoupled restoration pipeline with Adaptive Structural Prior Injection (ASPI)
+to guide geometric rectification from texture-restoration features.
+
+The [project page](https://hertzdot222.github.io/D2Turb/) is the best entry
+point for visual comparisons, expanded benchmark tables, and mechanism studies.
 
 ![D2Turb motivation and qualitative result](assets/img/teaser.png)
 
 ## Highlights
 
-- **Depth-aware simulation:** models spatially varying blur and deformation with scene-depth cues.
-- **Decoupled restoration:** separates texture restoration from geometric correction.
-- **Structural guidance:** ASPI injects Restormer features into the rectification stage.
-- **Inference structure:** public Restormer-based D2Turb model definitions are provided in [`code/models/`](code/models/).
-- **Supplementary evidence:** the project page includes additional rectifier, flow inversion, depth-noise, OCR qualitative, and cross-backbone visual studies.
+- **Depth-aware simulation:** models spatially varying blur and deformation using scene-depth cues.
+- **Decoupled restoration:** separates texture recovery from geometric rectification.
+- **ASPI guidance:** injects Restormer structural features into the rectifier for sharper geometry.
+- **Restormer-D2Turb code path:** provides a compact PyTorch model definition under [`code/models/`](code/models/).
+- **Expanded evidence:** includes synthetic, RLR-AT, TMT-Static, TurbText, depth-noise, flow-unwrapping, and cross-backbone studies.
 
-## Reported Results
+## Results Snapshot
 
-| Evaluation | Metric | D2Turb |
-| --- | ---: | ---: |
+| Setting | Metric | Reported D2Turb result |
+| --- | --- | ---: |
 | Synthetic average | PSNR / SSIM / LPIPS | 25.724 / 0.736 / **0.208** |
 | Real-world RLR-AT | NIQE / MUSIQ | **6.653** / **52.815** |
 | Depth-aware simulation study | NIQE / MUSIQ | 6.980 / 51.996 |
+| TMT-Static | PSNR / SSIM / LPIPS | 24.321 / 0.862 / 0.223 |
+| TurbText | AWDR / AD-LCS | 0.782 / 8.708 |
 
-Complete qualitative results, quantitative comparisons, and ablations are
-presented on the [project page](https://hertzdot222.github.io/D2Turb/).
+LPIPS and NIQE are lower-better metrics. PSNR, SSIM, MUSIQ, AWDR, and AD-LCS
+are higher-better metrics. Full comparisons and visual examples are available
+on the [project page](https://hertzdot222.github.io/D2Turb/).
+
+## Repository Structure
+
+```text
+.
+|-- assets/img/                  # Figures used by the project page
+|-- code/
+|   |-- requirements.txt         # Minimal PyTorch dependencies
+|   `-- models/
+|       |-- restormer.py         # Restormer backbone
+|       `-- d2turb_restormer.py  # ASPI + rectifier + D2Turb wrapper
+|-- index.html                   # GitHub Pages project page
+|-- tests/                       # Content and smoke tests
+`-- README.md
+```
+
+## Quick Start
+
+Install the minimal dependencies:
+
+```bash
+pip install -r code/requirements.txt
+```
+
+Run a forward-pass smoke test:
+
+```bash
+python -c "import sys; sys.path.insert(0, 'code'); import torch; from models import D2TurbRestormer; model = D2TurbRestormer().eval(); image = torch.rand(1, 3, 64, 64); outputs = model(image); print(outputs['restored'].shape)"
+```
+
+The public code currently focuses on the Restormer-based D2Turb inference
+structure. Dataset links and pretrained model links are reserved above for the
+release artifacts.
+
+## Resources
+
+| Resource | Link |
+| --- | --- |
+| Project page | [https://hertzdot222.github.io/D2Turb/](https://hertzdot222.github.io/D2Turb/) |
+| Paper | [https://arxiv.org/abs/2605.27460](https://arxiv.org/abs/2605.27460) |
+| Dataset | [Dataset]() |
+| Pretrained models | [Pretrained Models]() |
+| Model definition | [`code/models/d2turb_restormer.py`](code/models/d2turb_restormer.py) |
 
 ## Citation
 
