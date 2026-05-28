@@ -1,4 +1,4 @@
-# D2Turb
+# D²Turb
 
 **Depth-Aware Simulation and Decoupled Learning for Single-Frame Atmospheric Turbulence Mitigation**
 
@@ -8,7 +8,7 @@
 [Pretrained Models]() |
 [Code](code/models/d2turb_restormer.py)
 
-D2Turb is a single-frame atmospheric turbulence mitigation framework that
+D²Turb is a single-frame atmospheric turbulence mitigation framework that
 separates two coupled restoration problems: texture degradation and non-rigid
 geometric distortion. It uses depth-aware simulation to synthesize spatially
 varying turbulence and to provide intermediate tilt supervision, then applies a
@@ -18,19 +18,19 @@ to guide geometric rectification from texture-restoration features.
 The [project page](https://hertzdot222.github.io/D2Turb/) is the best entry
 point for visual comparisons, expanded benchmark tables, and mechanism studies.
 
-![D2Turb motivation and qualitative result](assets/img/teaser.png)
+![D²Turb motivation and qualitative result](assets/img/teaser.png)
 
 ## Highlights
 
 - **Depth-aware simulation:** models spatially varying blur and deformation using scene-depth cues.
 - **Decoupled restoration:** separates texture recovery from geometric rectification.
 - **ASPI guidance:** injects Restormer structural features into the rectifier for sharper geometry.
-- **Restormer-D2Turb code path:** provides a compact PyTorch model definition under [`code/models/`](code/models/).
+- **Restormer-D²Turb code path:** provides a compact PyTorch model definition under [`code/models/`](code/models/).
 - **Expanded evidence:** includes synthetic, RLR-AT, TMT-Static, TurbText, depth-noise, flow-unwrapping, and cross-backbone studies.
 
 ## Results Snapshot
 
-| Setting | Metric | Reported D2Turb result |
+| Setting | Metric | Reported D²Turb result |
 | --- | --- | ---: |
 | Synthetic average | PSNR / SSIM / LPIPS | 25.724 / 0.736 / **0.208** |
 | Real-world RLR-AT | NIQE / MUSIQ | **6.653** / **52.815** |
@@ -51,7 +51,7 @@ on the [project page](https://hertzdot222.github.io/D2Turb/).
 |   |-- requirements.txt         # Minimal PyTorch dependencies
 |   `-- models/
 |       |-- restormer.py         # Restormer backbone
-|       `-- d2turb_restormer.py  # ASPI + rectifier + D2Turb wrapper
+|       `-- d2turb_restormer.py  # ASPI + rectifier + D²Turb wrapper
 |-- index.html                   # GitHub Pages project page
 |-- tests/                       # Content and smoke tests
 `-- README.md
@@ -71,7 +71,7 @@ Run a forward-pass smoke test:
 python -c "import sys; sys.path.insert(0, 'code'); import torch; from models import D2TurbRestormer; model = D2TurbRestormer().eval(); image = torch.rand(1, 3, 64, 64); outputs = model(image); print(outputs['restored'].shape)"
 ```
 
-The public code currently focuses on the Restormer-based D2Turb inference
+The public code currently focuses on the Restormer-based D²Turb inference
 structure. Dataset links and pretrained model links are reserved above for the
 release artifacts.
 
@@ -89,7 +89,7 @@ release artifacts.
 
 ```bibtex
 @article{d2turb,
-  title = {D2Turb: Depth-Aware Simulation and Decoupled Learning for
+  title = {D²Turb: Depth-Aware Simulation and Decoupled Learning for
            Single-Frame Atmospheric Turbulence Mitigation},
   journal = {arXiv preprint arXiv:2605.27460},
   year = {2026}

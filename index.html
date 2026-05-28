@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Project page for D2Turb, a depth-aware simulation and decoupled learning framework for single-frame atmospheric turbulence mitigation.">
-  <title>D2Turb | Depth-Aware Simulation and Decoupled Learning</title>
+  <meta name="description" content="Project page for D²Turb, a depth-aware simulation and decoupled learning framework for single-frame atmospheric turbulence mitigation.">
+  <title>D²Turb | Depth-Aware Simulation and Decoupled Learning</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="assets/js/main.js" defer></script>
 </head>
@@ -12,7 +12,7 @@
   <a class="skip-link" href="#content">Skip to content</a>
   <header class="site-header">
     <nav class="nav container" aria-label="Primary navigation">
-      <a class="brand" href="#top">D<sup>2</sup>Turb</a>
+      <a class="brand" href="#top">D²Turb</a>
       <div class="nav-links">
         <a href="#method">Method</a>
         <a href="#benchmarks">Benchmarks</a>
@@ -28,7 +28,7 @@
       <div class="container hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">Single-frame atmospheric turbulence mitigation</p>
-          <h1>D<sup>2</sup>Turb: Depth-Aware Simulation and Decoupled Learning</h1>
+          <h1>D²Turb: Depth-Aware Simulation and Decoupled Learning</h1>
           <p class="abstract">
             A physics-grounded synthesis protocol provides spatially varying
             degradation and intermediate tilt supervision, while a decoupled
@@ -52,7 +52,7 @@
           <p>
             Real-world turbulence accumulates along the optical path: distant
             structures can be strongly blurred and warped while nearer regions
-            remain relatively stable. D<sup>2</sup>Turb targets both texture
+            remain relatively stable. D²Turb targets both texture
             recovery and geometric rectification under this spatial imbalance.
           </p>
         </div>
@@ -90,8 +90,8 @@
           </article>
         </div>
         <figure class="figure-card framework zoomable">
-          <button class="figure-button" type="button" data-lightbox-src="assets/img/framework.png" data-lightbox-alt="Overview of the D2Turb simulation and restoration framework.">
-            <img src="assets/img/framework.png" alt="Overview of the D2Turb simulation and restoration framework." loading="lazy">
+          <button class="figure-button" type="button" data-lightbox-src="assets/img/framework.png" data-lightbox-alt="Overview of the D²Turb simulation and restoration framework.">
+            <img src="assets/img/framework.png" alt="Overview of the D²Turb simulation and restoration framework." loading="lazy">
             <span>View larger</span>
           </button>
           <figcaption>Framework overview: synthesis, multi-stage supervision, and ASPI-guided spatial unwarping.</figcaption>
@@ -107,7 +107,7 @@
           <p>
             Read this section as the numerical backbone of the page: first the
             main synthetic and real-world comparisons, then the specialized
-            TMT-Static and TurbText checks. The primary D<sup>2</sup>Turb
+            TMT-Static and TurbText checks. The primary D²Turb
             setting uses Restormer as its texture deblurring backbone.
           </p>
         </div>
@@ -149,7 +149,7 @@
                 <tr><th scope="row">FocalNet</th><td>25.503</td><td>0.724</td><td>0.292</td></tr>
                 <tr><th scope="row">Restormer</th><td>25.521</td><td class="second">0.730</td><td>0.257</td></tr>
                 <tr><th scope="row">AdaIR</th><td class="second">25.533</td><td class="second">0.730</td><td>0.258</td></tr>
-                <tr class="ours"><th scope="row">D<sup>2</sup>Turb (Ours)</th><td>25.724</td><td>0.736</td><td>0.208</td></tr>
+                <tr class="ours"><th scope="row">D²Turb (Ours)</th><td>25.724</td><td>0.736</td><td>0.208</td></tr>
               </tbody>
             </table>
           </div>
@@ -177,7 +177,7 @@
                   <tr><th scope="row">FocalNet</th><td>27.459</td><td>25.101</td><td>23.922</td><td>0.805</td><td>0.711</td><td>0.656</td><td>0.198</td><td>0.302</td><td>0.380</td></tr>
                   <tr><th scope="row">Restormer</th><td>27.499</td><td>25.112</td><td>23.922</td><td>0.808</td><td>0.717</td><td>0.664</td><td>0.179</td><td>0.265</td><td>0.330</td></tr>
                   <tr><th scope="row">AdaIR</th><td>27.510</td><td>25.125</td><td>23.936</td><td>0.808</td><td>0.717</td><td>0.664</td><td>0.179</td><td>0.266</td><td>0.331</td></tr>
-                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb</th><td>27.660</td><td>25.331</td><td>24.153</td><td>0.811</td><td>0.724</td><td>0.673</td><td>0.150</td><td>0.215</td><td>0.261</td></tr>
+                  <tr class="ours"><th scope="row">D²Turb</th><td>27.660</td><td>25.331</td><td>24.153</td><td>0.811</td><td>0.724</td><td>0.673</td><td>0.150</td><td>0.215</td><td>0.261</td></tr>
                 </tbody>
               </table>
             </div>
@@ -200,7 +200,7 @@
                   <tr><th scope="row">FocalNet</th><td>7.285</td><td>46.471</td></tr>
                   <tr><th scope="row">Restormer</th><td>6.995</td><td>50.705</td></tr>
                   <tr><th scope="row">AdaIR</th><td class="second">6.933</td><td>51.135</td></tr>
-                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb</th><td>6.653</td><td>52.815</td></tr>
+                  <tr class="ours"><th scope="row">D²Turb</th><td>6.653</td><td>52.815</td></tr>
                 </tbody>
               </table>
             </div>
@@ -247,11 +247,11 @@
                 <tr><th scope="row">TMT (Official)</th><td>23.709</td><td>0.843</td><td>0.279</td><td>0.794</td><td>8.682</td></tr>
                 <tr><th scope="row">TMT</th><td>24.019</td><td>0.848</td><td>0.289</td><td>0.796</td><td>8.673</td></tr>
                 <tr><th scope="row">FocalNet</th><td>24.054</td><td>0.847</td><td>0.309</td><td>0.737</td><td>7.662</td></tr>
-                <tr class="ours"><th scope="row">D<sup>2</sup>Turb + FocalNet</th><td>24.234</td><td>0.858</td><td>0.248</td><td>0.779</td><td>8.282</td></tr>
+                <tr class="ours"><th scope="row">D²Turb + FocalNet</th><td>24.234</td><td>0.858</td><td>0.248</td><td>0.779</td><td>8.282</td></tr>
                 <tr><th scope="row">Restormer</th><td>24.072</td><td>0.859</td><td>0.286</td><td>0.746</td><td>8.084</td></tr>
-                <tr class="ours"><th scope="row">D<sup>2</sup>Turb + Restormer</th><td>24.319</td><td>0.871</td><td>0.222</td><td>0.768</td><td>8.152</td></tr>
+                <tr class="ours"><th scope="row">D²Turb + Restormer</th><td>24.319</td><td>0.871</td><td>0.222</td><td>0.768</td><td>8.152</td></tr>
                 <tr><th scope="row">AdaIR</th><td>24.071</td><td>0.849</td><td>0.285</td><td>0.742</td><td>8.524</td></tr>
-                <tr class="ours"><th scope="row">D<sup>2</sup>Turb + AdaIR</th><td>24.321</td><td>0.862</td><td>0.223</td><td>0.782</td><td>8.708</td></tr>
+                <tr class="ours"><th scope="row">D²Turb + AdaIR</th><td>24.321</td><td>0.862</td><td>0.223</td><td>0.782</td><td>8.708</td></tr>
               </tbody>
             </table>
           </div>
@@ -271,8 +271,8 @@
         </div>
         <div class="gallery-grid">
           <figure class="figure-card zoomable wide">
-            <button class="figure-button" type="button" data-lightbox-src="assets/img/synthetic-comparison.png" data-lightbox-alt="Synthetic qualitative comparison across competing methods and D2Turb.">
-              <img src="assets/img/synthetic-comparison.png" alt="Synthetic qualitative comparison across competing methods and D2Turb." loading="lazy">
+            <button class="figure-button" type="button" data-lightbox-src="assets/img/synthetic-comparison.png" data-lightbox-alt="Synthetic qualitative comparison across competing methods and D²Turb.">
+              <img src="assets/img/synthetic-comparison.png" alt="Synthetic qualitative comparison across competing methods and D²Turb." loading="lazy">
               <span>Inspect synthetic comparison</span>
             </button>
             <figcaption>Synthetic evaluation: text and rigid contours reveal residual warp and over-smoothing.</figcaption>
@@ -354,11 +354,11 @@
               </thead>
               <tbody>
                 <tr><th scope="row">Standalone Deblur (Restormer)</th><td>28.427</td><td>0.810</td><td>0.215</td></tr>
-                <tr class="ours"><th scope="row">Joint Deblur within D2Turb</th><td>28.570</td><td>0.818</td><td>0.188</td></tr>
+                <tr class="ours"><th scope="row">Joint Deblur within D²Turb</th><td>28.570</td><td>0.818</td><td>0.188</td></tr>
                 <tr><th scope="row">Standalone Deblur (FocalNet)</th><td>28.442</td><td>0.814</td><td>0.226</td></tr>
-                <tr class="ours"><th scope="row">Joint Deblur within D2Turb</th><td>28.494</td><td>0.815</td><td>0.218</td></tr>
+                <tr class="ours"><th scope="row">Joint Deblur within D²Turb</th><td>28.494</td><td>0.815</td><td>0.218</td></tr>
                 <tr><th scope="row">Standalone Deblur (AdaIR)</th><td>28.434</td><td>0.810</td><td>0.215</td></tr>
-                <tr class="ours"><th scope="row">Joint Deblur within D2Turb</th><td>28.571</td><td>0.819</td><td>0.189</td></tr>
+                <tr class="ours"><th scope="row">Joint Deblur within D²Turb</th><td>28.571</td><td>0.819</td><td>0.189</td></tr>
               </tbody>
             </table>
           </div>
@@ -415,24 +415,24 @@
           <p class="eyebrow">Backbone Visual Comparisons</p>
           <h3>Decoupling improves both synthetic and real-world outputs</h3>
           <p>
-            Across Restormer, FocalNet, and AdaIR, the D2Turb wrapper reduces
+            Across Restormer, FocalNet, and AdaIR, the D²Turb wrapper reduces
             residual warping while preserving sharper local structures.
           </p>
         </div>
         <div class="gallery-grid">
           <figure class="figure-card zoomable wide">
-            <button class="figure-button" type="button" data-lightbox-src="assets/img/backbone-synthetic-comparison.png" data-lightbox-alt="Supplementary synthetic qualitative comparison across Restormer, FocalNet, AdaIR, and their D2Turb variants.">
-              <img src="assets/img/backbone-synthetic-comparison.png" alt="Supplementary synthetic qualitative comparison across Restormer, FocalNet, AdaIR, and their D2Turb variants." loading="lazy">
+            <button class="figure-button" type="button" data-lightbox-src="assets/img/backbone-synthetic-comparison.png" data-lightbox-alt="Supplementary synthetic qualitative comparison across Restormer, FocalNet, AdaIR, and their D²Turb variants.">
+              <img src="assets/img/backbone-synthetic-comparison.png" alt="Supplementary synthetic qualitative comparison across Restormer, FocalNet, AdaIR, and their D²Turb variants." loading="lazy">
               <span>Inspect backbone synthetic comparison</span>
             </button>
             <figcaption>Supplementary synthetic comparison: standalone backbones restore texture but leave visible non-rigid warp.</figcaption>
           </figure>
           <figure class="figure-card zoomable wide">
-            <button class="figure-button" type="button" data-lightbox-src="assets/img/backbone-real-comparison.png" data-lightbox-alt="Supplementary real-world qualitative comparison across Restormer, FocalNet, AdaIR, and their D2Turb variants.">
-              <img src="assets/img/backbone-real-comparison.png" alt="Supplementary real-world qualitative comparison across Restormer, FocalNet, AdaIR, and their D2Turb variants." loading="lazy">
+            <button class="figure-button" type="button" data-lightbox-src="assets/img/backbone-real-comparison.png" data-lightbox-alt="Supplementary real-world qualitative comparison across Restormer, FocalNet, AdaIR, and their D²Turb variants.">
+              <img src="assets/img/backbone-real-comparison.png" alt="Supplementary real-world qualitative comparison across Restormer, FocalNet, AdaIR, and their D²Turb variants." loading="lazy">
               <span>Inspect backbone real-world comparison</span>
             </button>
-            <figcaption>Supplementary RLR-AT comparison: D2Turb variants produce straighter boundaries and cleaner local geometry.</figcaption>
+            <figcaption>Supplementary RLR-AT comparison: D²Turb variants produce straighter boundaries and cleaner local geometry.</figcaption>
           </figure>
         </div>
       </div>
@@ -540,11 +540,11 @@
                 <thead><tr><th scope="col">Method</th><th scope="col">PSNR &uarr;</th><th scope="col">SSIM &uarr;</th><th scope="col">LPIPS &darr;</th><th scope="col">NIQE &darr;</th><th scope="col">MUSIQ &uarr;</th></tr></thead>
                 <tbody>
                   <tr><th scope="row">Restormer</th><td>25.521</td><td>0.730</td><td>0.257</td><td>6.995</td><td>50.705</td></tr>
-                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb + Restormer</th><td>25.724</td><td>0.736</td><td>0.208</td><td>6.653</td><td>52.815</td></tr>
+                  <tr class="ours"><th scope="row">D²Turb + Restormer</th><td>25.724</td><td>0.736</td><td>0.208</td><td>6.653</td><td>52.815</td></tr>
                   <tr><th scope="row">FocalNet</th><td>25.503</td><td>0.724</td><td>0.292</td><td>7.285</td><td>46.471</td></tr>
-                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb + FocalNet</th><td>25.464</td><td>0.727</td><td>0.225</td><td>6.887</td><td>53.023</td></tr>
+                  <tr class="ours"><th scope="row">D²Turb + FocalNet</th><td>25.464</td><td>0.727</td><td>0.225</td><td>6.887</td><td>53.023</td></tr>
                   <tr><th scope="row">AdaIR</th><td>25.533</td><td>0.730</td><td>0.258</td><td>6.933</td><td>51.135</td></tr>
-                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb + AdaIR</th><td>25.712</td><td>0.736</td><td>0.210</td><td>6.892</td><td>52.317</td></tr>
+                  <tr class="ours"><th scope="row">D²Turb + AdaIR</th><td>25.712</td><td>0.736</td><td>0.210</td><td>6.892</td><td>52.317</td></tr>
                 </tbody>
               </table>
             </div>
@@ -559,11 +559,11 @@
                   <tr><th scope="row">TurbNet</th><td>26.57</td><td>171.97</td><td>206.58</td></tr>
                   <tr><th scope="row">TMT</th><td>22.75</td><td>102.97</td><td>321.30</td></tr>
                   <tr><th scope="row">Restormer</th><td>26.13</td><td>141.75</td><td>168.52</td></tr>
-                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb + Restormer</th><td>31.82</td><td>150.51</td><td>171.02</td></tr>
+                  <tr class="ours"><th scope="row">D²Turb + Restormer</th><td>31.82</td><td>150.51</td><td>171.02</td></tr>
                   <tr><th scope="row">FocalNet</th><td>6.77</td><td>52.88</td><td>11.20</td></tr>
-                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb + FocalNet</th><td>12.46</td><td>61.38</td><td>13.81</td></tr>
+                  <tr class="ours"><th scope="row">D²Turb + FocalNet</th><td>12.46</td><td>61.38</td><td>13.81</td></tr>
                   <tr><th scope="row">AdaIR</th><td>28.74</td><td>147.18</td><td>178.74</td></tr>
-                  <tr class="ours"><th scope="row">D<sup>2</sup>Turb + AdaIR</th><td>34.43</td><td>155.95</td><td>183.45</td></tr>
+                  <tr class="ours"><th scope="row">D²Turb + AdaIR</th><td>34.43</td><td>155.95</td><td>183.45</td></tr>
                 </tbody>
               </table>
             </div>
@@ -578,7 +578,7 @@
           <p class="eyebrow">Resources</p>
           <h2 id="resources-title">Paper and Citation</h2>
           <p class="resource-note">
-            Project resources and citation information for D2Turb. This page
+            Project resources and citation information for D²Turb. This page
             reports the figures and numerical results contained in the
             manuscript and its supplementary material.
           </p>
@@ -590,7 +590,7 @@
         <div class="citation-card">
           <h3>Citation</h3>
           <pre><code>@article{d2turb,
-  title = {D2Turb: Depth-Aware Simulation and Decoupled
+  title = {D²Turb: Depth-Aware Simulation and Decoupled
            Learning for Single-Frame Atmospheric Turbulence Mitigation},
   journal = {arXiv preprint arXiv:2605.27460},
   year = {2026}
@@ -602,7 +602,7 @@
 
   <footer class="footer">
     <div class="container">
-      <p>D<sup>2</sup>Turb project page. Figures and values are reproduced from the accompanying manuscript.</p>
+      <p>D²Turb project page. Figures and values are reproduced from the accompanying manuscript.</p>
     </div>
   </footer>
 

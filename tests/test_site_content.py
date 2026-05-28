@@ -120,7 +120,7 @@ class ProjectPageContractTest(unittest.TestCase):
     def test_readme_is_a_public_project_landing_page(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         for marker in (
-            "# D2Turb",
+            "# D²Turb",
             "https://hertzdot222.github.io/D2Turb/",
             "[Paper](https://arxiv.org/abs/2605.27460)",
             "[Dataset]()",
@@ -135,9 +135,16 @@ class ProjectPageContractTest(unittest.TestCase):
             "AD-LCS",
         ):
             self.assertIn(marker, readme)
-        for marker in ("<sup>", "Simplified Demo Code", "placeholder", "CRNN", "DAN", "ASTER", "recognition metric"):
+        for marker in ("# D2Turb", "<sup>", "Simplified Demo Code", "placeholder", "CRNN", "DAN", "ASTER", "recognition metric"):
             self.assertNotIn(marker, readme)
         self.assertTrue((ROOT / ".nojekyll").exists())
+
+    def test_project_name_uses_superscript_two_in_public_copy(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("<title>D²Turb | Depth-Aware Simulation and Decoupled Learning</title>", html)
+        self.assertIn("# D²Turb", readme)
+        self.assertIn("D²Turb is a single-frame atmospheric turbulence mitigation framework", readme)
 
     def test_page_resource_links_are_clean_and_include_repository(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
