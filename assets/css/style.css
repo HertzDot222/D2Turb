@@ -339,8 +339,7 @@ figure {
 .method-section,
 .gallery-section,
 .supplementary-section,
-.depth-evidence,
-.limitations-section {
+.depth-evidence {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   background: var(--surface);
@@ -555,23 +554,6 @@ summary {
   gap: 20px;
 }
 
-.limitations-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.limitation h3 {
-  margin: 15px 0 7px;
-  color: #13253a;
-  font-size: 1.06rem;
-}
-
-.limitation > p {
-  color: var(--muted);
-  font-size: 0.94rem;
-}
-
 .resources-section {
   padding-bottom: 80px;
 }
@@ -673,8 +655,7 @@ summary {
   }
 
   .pillars,
-  .two-column,
-  .limitations-grid {
+  .two-column {
     grid-template-columns: 1fr;
   }
 }

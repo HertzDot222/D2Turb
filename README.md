@@ -32,8 +32,8 @@ the Restormer restoration stage into the geometric rectifier.
 | Real-world RLR-AT | NIQE / MUSIQ | **6.653** / **52.815** |
 | Depth-aware simulation study | NIQE / MUSIQ | 6.980 / 51.996 |
 
-Complete qualitative results, quantitative comparisons, ablations, and
-limitations are presented on the [project page](https://hertzdot222.github.io/D2Turb/).
+Complete qualitative results, quantitative comparisons, and ablations are
+presented on the [project page](https://hertzdot222.github.io/D2Turb/).
 
 ## Citation
 

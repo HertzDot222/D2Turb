@@ -35,7 +35,6 @@ class ProjectPageContractTest(unittest.TestCase):
             "Rectifier Design",
             "Backbone Visual Comparisons",
             "Ablation Studies",
-            "Limitations",
             "0.208",
             "6.653",
             "52.815",
@@ -67,12 +66,16 @@ class ProjectPageContractTest(unittest.TestCase):
             "backbone-real-comparison.png",
             "aspi-features.png",
             "depth-mapping-comparison.png",
-            "limitations-depth.png",
-            "limitations-extreme.png",
         ):
             asset = ROOT / "assets" / "img" / name
             self.assertTrue(asset.exists(), f"missing figure asset: {name}")
             self.assertGreater(asset.stat().st_size, 10_000, f"empty-looking figure asset: {name}")
+
+    def test_limitations_section_is_not_published(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("Limitations", html)
+        self.assertNotIn("limitations-depth.png", html)
+        self.assertNotIn("limitations-extreme.png", html)
 
     def test_visual_and_interaction_assets_are_implemented(self):
         css = (ROOT / "assets" / "css" / "style.css").read_text(encoding="utf-8")
